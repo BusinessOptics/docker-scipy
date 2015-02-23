@@ -25,6 +25,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
+set -e
 mkdir -p /root/src
 cd /root/src/
 wget http://www.netlib.org/lapack/lapack.tgz
