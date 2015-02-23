@@ -1,7 +1,7 @@
 FROM businessoptics/ubuntu:precise
 MAINTAINER Jason Brownbridge <jason@businessoptics.biz>
 
-RUN apt-get -y install --no-install-recommends install \
+RUN apt-get -y install --no-install-recommends \
   gfortran \
   gcc \
   make
@@ -32,5 +32,5 @@ ONBUILD mkdir -p /usr/src/app
 ONBUILD COPY packages.txt /usr/src/app/packages.txt
 ONBUILD COPY requirements.txt /usr/src/app/requirements.txt
 ONBUILD RUN cat /usr/src/app/packages.txt | \
-  apt-get -y install --no-install-recommends install
+  apt-get -y install --no-install-recommends
 ONBUILD RUN while read r; do pip install -U $r ; done < /usr/src/app/requirements.txt
