@@ -4,7 +4,8 @@ MAINTAINER Jason Brownbridge <jason@businessoptics.biz>
 RUN apt-get -y install --no-install-recommends \
   gfortran \
   gcc \
-  make
+  make \
+  wget
 
 # hdf5
 ADD hdf5_install.sh /tmp/hdf5_install.sh
