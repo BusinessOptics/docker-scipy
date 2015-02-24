@@ -32,7 +32,7 @@ RUN \
   pip install -U h5py==2.3.1
 
 # Lazy install of required packages
-ONBUILD mkdir -p /usr/src/app
+ONBUILD RUN mkdir -p /usr/src/app
 ONBUILD RUN apt-get update
 ONBUILD COPY packages.txt /usr/src/app/packages.txt
 ONBUILD COPY requirements.txt /usr/src/app/requirements.txt
