@@ -1,11 +1,14 @@
 FROM businessoptics/ubuntu:precise
 MAINTAINER Jason Brownbridge <jason@businessoptics.biz>
 
+RUN apt-get update
+
 RUN apt-get -y install --no-install-recommends \
   gfortran \
   gcc \
-  make \
-  wget
+  make
+
+RUN rm -Rf /var/lib/apt/lists/*
 
 # hdf5
 ADD hdf5_install.sh /tmp/hdf5_install.sh
@@ -30,8 +33,10 @@ RUN \
 
 # Lazy install of required packages
 ONBUILD mkdir -p /usr/src/app
+ONBUILD RUN apt-get update
 ONBUILD COPY packages.txt /usr/src/app/packages.txt
 ONBUILD COPY requirements.txt /usr/src/app/requirements.txt
 ONBUILD RUN cat /usr/src/app/packages.txt | \
   apt-get -y install --no-install-recommends
 ONBUILD RUN while read r; do pip install -U $r ; done < /usr/src/app/requirements.txt
+ONBUILD RUN rm -Rf /var/lib/apt/lists/*
