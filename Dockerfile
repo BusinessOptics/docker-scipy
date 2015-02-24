@@ -36,7 +36,6 @@ ONBUILD RUN mkdir -p /usr/src/app
 ONBUILD RUN apt-get update
 ONBUILD COPY packages.txt /usr/src/app/packages.txt
 ONBUILD COPY requirements.txt /usr/src/app/requirements.txt
-ONBUILD RUN cat /usr/src/app/packages.txt | \
-  apt-get -y install --no-install-recommends
+ONBUILD RUN while read p; do echo "Installing $p" && apt-get -y install --no-install-recommends $p ; done < /usr/src/app/packages.txt
 ONBUILD RUN while read r; do pip install -U $r ; done < /usr/src/app/requirements.txt
 ONBUILD RUN rm -Rf /var/lib/apt/lists/*
